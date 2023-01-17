@@ -49,6 +49,10 @@ function useTodos() {
     newTodos.splice(todoIndex, 1);
     saveTodos(newTodos);
   };
+
+  const editTodo = () => {
+    console.log('edit');
+  }
   
   const state = {
     loading,
@@ -67,6 +71,7 @@ function useTodos() {
     deleteTodo,
     setOpenModal,
     sincronizeTodos,
+    editTodo
   };
 
   return { state, stateUpdaters };

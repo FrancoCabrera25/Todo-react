@@ -33,6 +33,7 @@ export const HomePage = () => {
         deleteTodo,
         setSearchValue,
         sincronizeTodos,
+        editTodo
     } = stateUpdaters;
 
     return (
@@ -67,6 +68,7 @@ export const HomePage = () => {
                         completed={todo.completed}
                         onComplete={() => completeTodo(todo.text)}
                         onDelete={() => deleteTodo(todo.text)}
+                        onEdit={()=> editTodo(todo.text)}
                     />
                 )}
             </TodoList>
