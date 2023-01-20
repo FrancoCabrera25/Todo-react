@@ -8,13 +8,13 @@ import { TodoItem } from '../../components/todos/TodoItem';
 import { TodosError } from '../../components/ui/TodosError';
 import { TodosLoading } from '../../components/ui/TodosLoading';
 import { EmptyTodos } from '../../components/ui/EmptyTodos';
-import { TodoForm } from '../../components/todos/TodoForm';
 import { CreateTodoButton } from '../../components/ui/CreateTodoButton';
-import { Modal } from '../../components/ui/Modal';
 import { ChangeAlert } from '../../components/ui/ChangeAlert';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
     const { state, stateUpdaters } = useTodos();
+    const navigate = useNavigate();
 
     const {
         error,
@@ -22,13 +22,13 @@ export const HomePage = () => {
         searchedTodos,
         totalTodos,
         completedTodos,
-        openModal,
+        //openModal,
         searchValue,
     } = state;
 
     const {
-        setOpenModal,
-        addTodo,
+        //setOpenModal,
+        //addTodo,
         completeTodo,
         deleteTodo,
         setSearchValue,
@@ -66,20 +66,23 @@ export const HomePage = () => {
                         key={todo.text}
                         text={todo.text}
                         completed={todo.completed}
-                        onComplete={() => completeTodo(todo.text)}
-                        onDelete={() => deleteTodo(todo.text)}
-                        onEdit={()=> editTodo(todo.text)}
+                        onComplete={() => completeTodo(todo.id)}
+                        onDelete={() => deleteTodo(todo.id)}
+                        onEdit={()=> navigate(`/edit/${todo.id}`)}
                     />
                 )}
             </TodoList>
 
-            {!!openModal && (
+            {/* {!!openModal && (
                 <Modal>
                     <TodoForm addTodo={addTodo} setOpenModal={setOpenModal} />
                 </Modal>
-            )}
+            )} */}
 
-            <CreateTodoButton setOpenModal={setOpenModal} />
+            <CreateTodoButton 
+             onClick={()=> navigate('/new') }
+            //setOpenModal={setOpenModal} 
+            />
 
             <ChangeAlert sincronize={sincronizeTodos} />
         </React.Fragment>
